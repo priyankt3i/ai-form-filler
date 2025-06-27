@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
         body {
-            width: 300px;
+            width: 350px; /* Increased width to accommodate new elements */
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* bg-slate-900 */
             color: #f8fafc; /* text-white */
@@ -65,22 +65,15 @@
             justify-content: center;
             font-size: 0.875rem;
         }
-        .animate-spin-slow {
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
         hr {
             width: 100%;
             border-color: #334155; /* border-slate-700 */
         }
-        .api-key-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .section {
+             width: 100%;
+             display: flex;
+             flex-direction: column;
+             gap: 0.5rem;
         }
         label {
             font-size: 0.875rem;
@@ -106,29 +99,75 @@
             text-align: center;
             color: #16a34a;
         }
+        details {
+            width: 100%;
+            background-color: #1e293b;
+            border-radius: 0.5rem;
+            border: 1px solid #334155;
+        }
+        summary {
+            font-weight: 700;
+            padding: 0.75rem;
+            cursor: pointer;
+            outline: none;
+            color: #94a3b8;
+        }
+        .log-content {
+            padding: 0 1rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            background-color: #0f172a;
+            border: 1px solid #475569;
+            color: #e2e8f0;
+            font-family: monospace;
+            font-size: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            box-sizing: border-box;
+        }
+        #clear-logs-btn {
+             background-color: #dc2626; /* bg-red-600 */
+             margin-top: 0.5rem;
+        }
+        #clear-logs-btn:hover {
+            background-color: #b91c1c;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>AI Form Filler</h1>
-        <p>Click the button to analyze and fill the form on the current page.</p>
+        <p>Click to analyze and fill the form on the current page.</p>
         
         <button id="fill-form-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wand-sparkles"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L11.8 9.2a1.21 1.21 0 0 0 0 1.72l5.12 5.12a1.21 1.21 0 0 0 1.72 0l6.84-6.84a1.21 1.21 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M3 8h4"/><path d="M6 18v-4"/><path d="M4 16h4"/><path d="M19 14v-4"/><path d="M17 12h4"/><path d="m22 22-2-2"/><path d="m2 2 2 2"/></svg>
             <span>Fill Form</span>
         </button>
 
         <div id="status"></div>
-
         <hr/>
-
-        <div class="api-key-section">
+        <div class="section">
             <label for="api-key-input">Google AI API Key</label>
             <input type="password" id="api-key-input" placeholder="Paste your API key here">
             <button id="save-key-btn">Save Key</button>
             <div id="key-status"></div>
         </div>
+        <hr/>
 
+        <details>
+            <summary>AI Debug Log</summary>
+            <div class="log-content">
+                <label for="ai-request-log">Request to AI</label>
+                <textarea id="ai-request-log" readonly></textarea>
+                <label for="ai-response-log">Response from AI</label>
+                <textarea id="ai-response-log" readonly></textarea>
+                <button id="clear-logs-btn">Clear Logs</button>
+            </div>
+        </details>
     </div>
     <script src="popup.js"></script>
 </body>
